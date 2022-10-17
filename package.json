@@ -3,13 +3,10 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://camilasbvieira.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "phosphor-react": "^1.4.1",
