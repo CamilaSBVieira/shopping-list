@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://camilasbvieira.github.io/shopping-list",
+  "homepage": "http://camilasbvieira.github.io/shopping-list",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
