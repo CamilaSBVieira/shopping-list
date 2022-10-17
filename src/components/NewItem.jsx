@@ -22,7 +22,7 @@ export default function NewItem({ item, handleChange, handleSubmit }) {
 }
 
 NewItem.propTypes = {
-    // item: PropTypes.object,
+    item: PropTypes.object,
     handleChange: PropTypes.func,
     handleSubmit: PropTypes.func
 }

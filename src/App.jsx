@@ -40,6 +40,10 @@ function App() {
     setItems(newArray);
   };
 
+  const handleEraseList = () => {
+    setItems([]);
+  }
+
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
@@ -97,8 +101,6 @@ function App() {
           name={name}
           handleClick={handleChangeSubmitName}></User>
         )}
-      {/* <p>{position.x}</p>
-      <p>{position.y}</p> */}
       {name && (
         <>
           {isEditList && (
@@ -116,6 +118,7 @@ function App() {
               <ItemsList
                 isEdit={isEditList}
                 items={items}
+                handleErase={handleEraseList}
                 handleDelete={handleDeleteItem}
                 handleCheck={handleCheckItem}></ItemsList>
             </>
