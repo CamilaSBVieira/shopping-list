@@ -1,18 +1,17 @@
-import { useEffect } from 'react';
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
 import ItemsList from './components/ItemsList'
 import NewItem from './components/NewItem'
-import './styles/main.css';
 import FunctionButton from './components/FunctionButton';
 import Greeting from './components/Greeting';
-import User from './components/User';
+import expiresAt from './functions/functions';
+import './styles/main.css';
 
 function App() {
   //ITEM
   const [item, setItem] = useState({});
   const handleChangeItem = ({ target }) => {
     const { name, value } = target;
-    setItem({ ...item, [name]: value, id: Date.now(), checked: false });
+    setItem({ ...item, [name]: value, id: Date.now(), checked: false, expire: expiresAt() });
   };
 
 
