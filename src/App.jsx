@@ -8,12 +8,11 @@ import './styles/main.css';
 
 function App() {
   //ITEM
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState();
   const handleChangeItem = ({ target }) => {
     const { name, value } = target;
     setItem({ ...item, [name]: value, id: Date.now(), checked: false, expire: expiresAt() });
   };
-
 
   //ITEMS
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('items')) || []);
@@ -47,6 +46,25 @@ function App() {
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
 
+  // PRIMEIRO PRECISO PEGAR TODOS QUE ESTÃO COM DATA IGUAL A DE AGORA (MEIA NOITE)
+  // DEPOIS PEGAR TODOS QUE ESTÃO CHECKED TRUE
+  // let newArray = items.filter(i => (i.checked && i.expire === new Date()))
+  // setItems(items.filter(i => !newArray.includes(i)));
+
+  // DELETE CHECKED ITEMS
+  useEffect(() => {
+    const today = new Date();
+    const timeToDelete = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    const remainingTime = (timeToDelete - today);
+    localStorage.setItem('timeToDelete', remainingTime);
+    setTimeout(() => {
+      const dia = new Date(new Date().setUTCHours(0,0,0,0));
+      let newArray = items.filter(i => (i.checked && i.expire === dia));
+      setItems(items.filter(i => !newArray.includes(i)));
+    }, remainingTime);
+  }, []);
+
+
   // FUNCTION BUTTON
   const [isEditList, setIsEditList] = useState(false);
 
@@ -56,39 +74,39 @@ function App() {
 
   return (
     <main className="bg-white p-6 flex-col space-y-3">
-        <>
-          {isEditList && (
-            <NewItem
-              item={item}
-              handleChange={handleChangeItem}
-              handleSubmit={handleSubmitItem}></NewItem>
-          )}
-          {items.length > 0 && (
+      <>
+        {isEditList && (
+          <NewItem
+            item={item}
+            handleChange={handleChangeItem}
+            handleSubmit={handleSubmitItem}></NewItem>
+        )}
+        {items.length > 0 && (
+          <>
+            {!isEditList &&
+              (
+                <Greeting message={`Oi. Hoje você precisa comprar:`}></Greeting>
+              )}
+            <ItemsList
+              isEdit={isEditList}
+              items={items}
+              handleErase={handleEraseList}
+              handleDelete={handleDeleteItem}
+              handleCheck={handleCheckItem}></ItemsList>
+          </>
+        ) || (
             <>
               {!isEditList &&
                 (
-                  <Greeting message={`Oi. Hoje você precisa comprar:`}></Greeting>
+                  <Greeting message={`Oi. Sua lista ainda está vazia.`}></Greeting>
                 )}
-              <ItemsList
-                isEdit={isEditList}
-                items={items}
-                handleErase={handleEraseList}
-                handleDelete={handleDeleteItem}
-                handleCheck={handleCheckItem}></ItemsList>
             </>
-          ) || (
-              <>
-                {!isEditList &&
-                  (
-                    <Greeting message={`Oi. Sua lista ainda está vazia.`}></Greeting>
-                  )}
-              </>
-            )
-          }
-          <FunctionButton
-            handleClick={handleClickFunctionButton}
-            isEdit={isEditList}></FunctionButton>
-        </>
+          )
+        }
+        <FunctionButton
+          handleClick={handleClickFunctionButton}
+          isEdit={isEditList}></FunctionButton>
+      </>
     </main >
   )
 }
