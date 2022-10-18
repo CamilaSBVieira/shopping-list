@@ -8,7 +8,7 @@ import './styles/main.css';
 
 function App() {
   //ITEM
-  const [item, setItem] = useState();
+  const [item, setItem] = useState({});
   const handleChangeItem = ({ target }) => {
     const { name, value } = target;
     setItem({ ...item, [name]: value, id: Date.now(), checked: false, expire: expiresAt() });
