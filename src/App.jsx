@@ -48,33 +48,6 @@ function App() {
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
 
-  //NAME
-  const [name, setName] = useState(localStorage.getItem('name') || '');
-  const handleChangeName = ({ target }) => {
-    const newName = target.value;
-    setName(newName);
-  };
-
-  useEffect(() => {
-    document.title = `Hi${name ? `, ${name}` : ''}`
-    localStorage.setItem('name', name);
-  }, [name]);
-
-  const [isNameSubmit, setIsNameSubmit] = useState(localStorage.getItem('isNameSubmit'));
-  const handleSubmitName = (event) => {
-    event.preventDefault();
-    if (!name) return;
-    setIsNameSubmit(true);
-  };
-
-  const handleChangeSubmitName = () => {
-    setIsNameSubmit(false);
-  }
-
-  useEffect(() => {
-    localStorage.setItem('isNameSubmit', isNameSubmit);
-  }, [isNameSubmit]);
-
   // FUNCTION BUTTON
   const [isEditList, setIsEditList] = useState(false);
 
@@ -84,24 +57,6 @@ function App() {
 
   return (
     <main className="bg-white p-6 flex-col space-y-3">
-      {!isNameSubmit && (
-        <form onSubmit={handleSubmitName}>
-          < input value={name}
-          placeholder='Digite seu nome...'
-            onChange={handleChangeName}
-            className='bg-white ring-2 ring-blue-400 rounded-l text-blue-500 p-3 focus:ring-blue-300 outline-0' />
-          <button
-            className='bg-blue-400 hover:bg-blue-300 rounded-r text-white hover:ring-blue-300 p-3 ring-2 ring-blue-400'
-          >
-            Submit
-          </button>
-        </form>
-      ) || (
-          <User
-          name={name}
-          handleClick={handleChangeSubmitName}></User>
-        )}
-      {name && (
         <>
           {isEditList && (
             <NewItem
@@ -113,7 +68,7 @@ function App() {
             <>
               {!isEditList &&
                 (
-                  <Greeting message={`Oi ${name}. Hoje você precisa comprar:`}></Greeting>
+                  <Greeting message={`Oi. Hoje você precisa comprar:`}></Greeting>
                 )}
               <ItemsList
                 isEdit={isEditList}
@@ -126,7 +81,7 @@ function App() {
               <>
                 {!isEditList &&
                   (
-                    <Greeting message={`Oi, ${name}. Sua lista ainda está vazia.`}></Greeting>
+                    <Greeting message={`Oi. Sua lista ainda está vazia.`}></Greeting>
                   )}
               </>
             )
@@ -135,7 +90,6 @@ function App() {
             handleClick={handleClickFunctionButton}
             isEdit={isEditList}></FunctionButton>
         </>
-      )}
     </main >
   )
 }

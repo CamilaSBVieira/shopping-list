@@ -15,8 +15,9 @@ export default function ItemsList({ items, handleDelete, isEdit, handleCheck, ha
                 </button>
             )}
             <div className='flex-col space-y-3'>
-
-                {items.map(item => {
+                {items.sort((item1, item2) => (item1.checked - item2.checked || item2.name.localeCompare(item1.name)))
+                .reverse()
+                .map(item => {
                     return (
                         <Item
                             key={item.id}
