@@ -56,9 +56,10 @@ function App() {
     const today = new Date();
     const timeToDelete = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
     const remainingTime = (timeToDelete - today);
-    localStorage.setItem('timeToDelete', remainingTime);
+    console.log(remainingTime);
     setTimeout(() => {
-      const dia = new Date(new Date().setUTCHours(0,0,0,0));
+      const data = new Date();
+      const dia = data.getDate();
       let newArray = items.filter(i => (i.checked && i.expire === dia));
       setItems(items.filter(i => !newArray.includes(i)));
     }, remainingTime);

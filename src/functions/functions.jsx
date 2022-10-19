@@ -1,6 +1,7 @@
 
 export default function expiresAt() {
-    const data = new Date(new Date().setUTCHours(0,0,0,0));
+    const data = new Date();
     data.setDate(data.getDate() + 1);
-    return data;
+    const dia = data.getDate();
+    return dia;
 }
