@@ -1,0 +1,14 @@
+export const iconStyle = 'h-10 w-10 cursor-pointer';
+export const itemChecked = 'bg-blue-500 text-lg flex justify-between  cursor-pointer space-x-2 items-center w-full uppercase text-white p-3';
+export const itemUnchecked = 'bg-blue-400 text-lg flex justify-between  cursor-pointer space-x-2 items-center w-full uppercase text-white p-3';
+export const fullWidth = 'w-full';
+export const inputStyle = 'bg-white ring-2 appearance-none ring-blue-400 rounded-l text-blue-500 p-3 focus:ring-blue-300 outline-0';
+export const buttonStyle = 'bg-blue-400 hover:bg-blue-300 rounded-r text-white hover:ring-blue-300 p-3 ring-2 ring-blue-400';
+export const formStyle = 'w-full p-4 flex';
+export const listStyle = 'flex-col space-y-3';
+export const squareButtonStyle = 'bg-blue-500 h-12 p-2 flex space-x-2 items-center text-white hover:bg-blue-400 ml-auto';
+export const iconSmallStyle = 'w-8 h-8';
+export const semiBold = 'font-semibold';
+export const greetingStyle = 'text-lg text-blue-500 font-semibold';
+export const roundedButtonStyle = 'bg-blue-500 rounded-full w-16 h-16 p-3 hover:bg-blue-400 float-right text-white';
+export const mainStyle = 'p-6 flex-col space-y-3';

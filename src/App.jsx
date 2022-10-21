@@ -5,6 +5,7 @@ import FunctionButton from './components/FunctionButton';
 import Greeting from './components/Greeting';
 import expiresAt from './functions/functions';
 import './styles/main.css';
+import { mainStyle } from './functions/styleStrings';
 
 function App() {
   //ITEM
@@ -51,6 +52,11 @@ function App() {
   // let newArray = items.filter(i => (i.checked && i.expire === new Date()))
   // setItems(items.filter(i => !newArray.includes(i)));
 
+  // se eu crio um item no dia 19, ele expira no dia 20;
+  // dia 20 a meia noite ele deleta todos do dia 20, criado no dia 19
+  // pode ser que tenha itens do dia 19, que expiram 20, mas não estão checados
+  // então eu preciso dar uma nova expireDate, que ai fica como se fosse criado dia 20, e evapora 21
+
   // DELETE CHECKED ITEMS
   useEffect(() => {
     const today = new Date();
@@ -61,7 +67,10 @@ function App() {
       const data = new Date();
       const dia = data.getDate();
       let newArray = items.filter(i => (i.checked && i.expire === dia));
-      setItems(items.filter(i => !newArray.includes(i)));
+      setItems(items.filter(i => !newArray.includes(i))
+      .map(item => {
+        return {...item, expire: expiresAt()};
+      }))
     }, remainingTime);
   }, []);
 
@@ -74,7 +83,7 @@ function App() {
   }
 
   return (
-    <main className="bg-white p-6 flex-col space-y-3">
+    <main className={mainStyle}>
       <>
         {isEditList && (
           <NewItem
