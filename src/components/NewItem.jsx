@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { buttonStyle, formStyle, inputStyle } from '../functions/styleStrings';
+import { buttonStyle, formStyle, inputStyle } from '../styles/styleStrings';
 import '../styles/main.css';
 
 export default function NewItem({ item, handleChange, handleSubmit }) {

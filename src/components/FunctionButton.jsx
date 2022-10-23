@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Pen, Check } from 'phosphor-react'
-import { iconStyle, roundedButtonStyle } from '../functions/styleStrings'
+import { iconStyle, roundedButtonStyle } from '../styles/styleStrings'
 
 export default function FunctionButton({ handleClick, isEdit }) {
     return (

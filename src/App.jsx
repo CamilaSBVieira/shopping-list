@@ -3,16 +3,15 @@ import ItemsList from './components/ItemsList'
 import NewItem from './components/NewItem'
 import FunctionButton from './components/FunctionButton';
 import Greeting from './components/Greeting';
-import expiresAt from './functions/functions';
 import './styles/main.css';
-import { mainStyle } from './functions/styleStrings';
+import { mainStyle } from './styles/styleStrings';
 
 function App() {
   //ITEM
   const [item, setItem] = useState({});
   const handleChangeItem = ({ target }) => {
     const { name, value } = target;
-    setItem({ ...item, [name]: value, id: Date.now(), checked: false, expire: expiresAt() });
+    setItem({ ...item, [name]: value, id: Date.now(), checked: false });
   };
 
   //ITEMS
@@ -43,36 +42,14 @@ function App() {
     setItems([]);
   }
 
+  // DELETE CHECKED ITEMS
+  const handleDeleteCheckedItems = () => {
+    setItems(items.filter(i => !i.checked));
+  };
+
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
-
-  // PRIMEIRO PRECISO PEGAR TODOS QUE ESTÃO COM DATA IGUAL A DE AGORA (MEIA NOITE)
-  // DEPOIS PEGAR TODOS QUE ESTÃO CHECKED TRUE
-  // let newArray = items.filter(i => (i.checked && i.expire === new Date()))
-  // setItems(items.filter(i => !newArray.includes(i)));
-
-  // se eu crio um item no dia 19, ele expira no dia 20;
-  // dia 20 a meia noite ele deleta todos do dia 20, criado no dia 19
-  // pode ser que tenha itens do dia 19, que expiram 20, mas não estão checados
-  // então eu preciso dar uma nova expireDate, que ai fica como se fosse criado dia 20, e evapora 21
-
-  // DELETE CHECKED ITEMS
-  useEffect(() => {
-    const today = new Date();
-    const timeToDelete = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-    const remainingTime = (timeToDelete - today);
-    console.log(remainingTime);
-    setTimeout(() => {
-      const data = new Date();
-      const dia = data.getDate();
-      let newArray = items.filter(i => (i.checked && i.expire === dia));
-      setItems(items.filter(i => !newArray.includes(i))
-      .map(item => {
-        return {...item, expire: expiresAt()};
-      }))
-    }, remainingTime);
-  }, []);
 
 
   // FUNCTION BUTTON
@@ -102,7 +79,8 @@ function App() {
               items={items}
               handleErase={handleEraseList}
               handleDelete={handleDeleteItem}
-              handleCheck={handleCheckItem}></ItemsList>
+              handleCheck={handleCheckItem}
+              handleDeleteChecked={handleDeleteCheckedItems}></ItemsList>
           </>
         ) || (
             <>

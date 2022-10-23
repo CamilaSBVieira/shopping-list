@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { greetingStyle } from "../functions/styleStrings";
+import { greetingStyle } from "../styles/styleStrings";
 
 export default function Greeting({ message }) {
     return (

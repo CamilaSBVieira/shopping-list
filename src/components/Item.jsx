@@ -1,5 +1,5 @@
 import '../styles/main.css';
-import { fullWidth, iconStyle, itemChecked, itemUnchecked } from '../functions/styleStrings';
+import { fullWidth, iconStyle, itemChecked, itemUnchecked } from '../styles/styleStrings';
 import PropTypes from 'prop-types';
 import { X, CheckSquare, Square } from 'phosphor-react';
 

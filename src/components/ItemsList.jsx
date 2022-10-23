@@ -2,18 +2,26 @@ import Item from './Item'
 import PropTypes from 'prop-types'
 import '../styles/main.css';
 import { Trash } from 'phosphor-react'
-import { iconSmallStyle, listStyle, semiBold, squareButtonStyle } from '../functions/styleStrings';
+import { iconSmallStyle, listStyle, semiBold, squareButtonStyle } from '../styles/styleStrings';
 
-export default function ItemsList({ items, handleDelete, isEdit, handleCheck, handleErase }) {
+export default function ItemsList({ items, handleDelete, isEdit, handleCheck, handleErase, handleDeleteChecked }) {
     return (
         <>
             {isEdit && (
+                <>
                 <button 
                 onClick={handleErase}
                 className={squareButtonStyle}>
                     <p className={semiBold}>Erase List</p>
                     <Trash className={iconSmallStyle}></Trash>
                 </button>
+                <button
+                onClick={handleDeleteChecked}
+                className={squareButtonStyle}>
+                    <p className={semiBold}>Erase Checked Items</p>
+                    <Trash className={iconSmallStyle}></Trash>
+                </button>
+                </>
             )}
             <div className={listStyle}>
                 {items.sort((item1, item2) => (item1.checked - item2.checked || item2.name.localeCompare(item1.name)))
@@ -39,5 +47,6 @@ ItemsList.propTypes = {
     handleDelete: PropTypes.func,
     isEdit: PropTypes.bool,
     handleCheck: PropTypes.func,
-    handleErase: PropTypes.func
+    handleErase: PropTypes.func,
+    handleDeleteChecked: PropTypes.func
 }
