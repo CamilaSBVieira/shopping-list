@@ -1,13 +1,10 @@
 {
   "name": "shopping-list",
-  "private": false,
+  "private": true,
   "version": "0.0.0",
-  "homepage": "https://camilasbvieira.github.io/shopping-list/",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run dist",
-    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -22,7 +19,6 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.12",
-    "gh-pages": "^4.0.0",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.1.8",
     "vite": "^3.1.0"
